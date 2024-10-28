@@ -1,8 +1,11 @@
-#include "reversi.h"
+
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+
+
+int makeMove(const char board[][26], int n, char turn, int *row, int *col);
 
 void printBoard(char board[][26], int n);
 
