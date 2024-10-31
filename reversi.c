@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+// Function prototypes for various game functionalities
 int makeMove(const char board[][26], int n, char turn, int *row, int *col);
 
 void printBoard(char board[][26], int n);
@@ -55,6 +55,7 @@ int heuristic(char board[][26], int n, char turn);
 int cornerWeight(char board[][26], int n, char turn);
 
 int main(void) {
+  // Variables for board dimension, player turns, and move coordinates
   int n;
   int counter = 2;
   char compColour, opponent;
@@ -63,6 +64,7 @@ int main(void) {
   int available;
   char rowChar;
   char colChar;
+  // Initialize the board with dimension and set starting tiles
   printf("Enter the board dimension (choose 8): ");
   scanf("%d", &n);
   char board[n][26];
@@ -79,6 +81,7 @@ int main(void) {
     }
   }
 
+  // Set computer color based on user input
   printf("Computer plays (B/W): ");
   scanf(" %c", &compColour);
   if (compColour == 'B') {
@@ -88,6 +91,7 @@ int main(void) {
   }
   printBoard(board, n);
 
+  // Game loop for alternating moves until there are no valid moves
   while ((!noMove(board, n, 'W') || !noMove(board, n, 'B')) && validd) {
     if (counter % 2 == 0 && noMove(board, n, 'B')) {
       printf("B player has no valid move.\n");
@@ -134,6 +138,7 @@ int main(void) {
     counter++;
   }
 
+  // Display winner or message in case of invalid move
   if (validd) {
     winner(board, n);
   } else {
@@ -142,6 +147,7 @@ int main(void) {
   return 0;
 }
 
+// Function to print the board with row and column labels
 void printBoard(char board[][26], int n) {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   printf("  ");
@@ -158,6 +164,7 @@ void printBoard(char board[][26], int n) {
   }
 }
 
+// Function to convert index to letter (for board display)
 char letter(int num, int n) {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   for (int i = 0; i < n; i++) {
@@ -167,6 +174,7 @@ char letter(int num, int n) {
   }
 }
 
+// Function to determine and print the winner based on tile counts
 void winner(char board[][26], int n) {
   int white = 0;
   int black = 0;
@@ -192,6 +200,7 @@ void winner(char board[][26], int n) {
   printf("W = %d AND B = %d\n", white, black);
 }
 
+// Helper functions for min-max algorithm with alpha-beta pruning, board updates, and score calculations
 int max(int x, int y) {
   if (x >= y) {
     return x;
